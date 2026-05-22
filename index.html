@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auditoria SEO & Google Ads — mtp-tours.com</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg2: #161b22;
+    --bg3: #21262d;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text2: #8b949e;
+    --accent: #58a6ff;
+    --green: #3fb950;
+    --yellow: #d29922;
+    --orange: #f0883e;
+    --red: #f85149;
+    --purple: #bc8cff;
+    --teal: #39d353;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.6; }
+
+  /* Layout */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+  /* Header */
+  header { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 40px 0 32px; }
+  .header-inner { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap; }
+  .header-badge { background: linear-gradient(135deg, #1f4e79, #0d47a1); border: 1px solid #1565c0; border-radius: 8px; padding: 10px 18px; font-size: 12px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; color: #90caf9; white-space: nowrap; }
+  h1 { font-size: 28px; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 6px; }
+  .subtitle { color: var(--text2); font-size: 15px; }
+  .meta-row { display: flex; gap: 24px; margin-top: 16px; flex-wrap: wrap; }
+  .meta-item { display: flex; align-items: center; gap: 6px; color: var(--text2); font-size: 13px; }
+  .meta-item strong { color: var(--text); }
+
+  /* Score Section */
+  .score-section { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 28px; margin: 32px 0; display: grid; grid-template-columns: auto 1fr; gap: 32px; align-items: center; }
+  .score-circle { width: 110px; height: 110px; border-radius: 50%; background: conic-gradient(var(--orange) 0% 58%, var(--bg3) 58% 100%); display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; }
+  .score-circle::after { content: ''; position: absolute; width: 80px; height: 80px; border-radius: 50%; background: var(--bg2); }
+  .score-number { position: relative; z-index: 1; font-size: 28px; font-weight: 800; color: var(--orange); }
+  .score-label { font-size: 11px; color: var(--text2); text-align: center; margin-top: 2px; display: block; }
+  .score-details h2 { font-size: 20px; margin-bottom: 8px; }
+  .score-details p { color: var(--text2); font-size: 14px; max-width: 600px; }
+  .grade-bars { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 16px; }
+  .grade-bar { background: var(--bg3); border-radius: 8px; padding: 12px 14px; }
+  .grade-bar-label { font-size: 12px; color: var(--text2); margin-bottom: 6px; }
+  .grade-bar-track { background: var(--bg); height: 6px; border-radius: 3px; overflow: hidden; }
+  .grade-bar-fill { height: 100%; border-radius: 3px; transition: width 0.3s; }
+  .grade-bar-score { font-size: 13px; font-weight: 700; margin-top: 4px; }
+
+  /* Sections */
+  section { margin: 40px 0; }
+  .section-title { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+  .section-title .icon { font-size: 22px; }
+
+  /* Alert Boxes */
+  .alert { border-radius: 10px; padding: 16px 18px; margin-bottom: 14px; border-left: 4px solid; }
+  .alert-critical { background: rgba(248, 81, 73, 0.08); border-color: var(--red); }
+  .alert-high { background: rgba(240, 136, 62, 0.08); border-color: var(--orange); }
+  .alert-medium { background: rgba(210, 153, 34, 0.08); border-color: var(--yellow); }
+  .alert-good { background: rgba(63, 185, 80, 0.08); border-color: var(--green); }
+  .alert-header { display: flex; align-items: flex-start; gap: 12px; }
+  .alert-badge { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; margin-top: 1px; text-transform: uppercase; letter-spacing: 0.4px; }
+  .badge-critical { background: rgba(248,81,73,0.2); color: var(--red); }
+  .badge-high { background: rgba(240,136,62,0.2); color: var(--orange); }
+  .badge-medium { background: rgba(210,153,34,0.2); color: var(--yellow); }
+  .badge-good { background: rgba(63,185,80,0.2); color: var(--green); }
+  .alert h3 { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .alert p, .alert li { font-size: 14px; color: var(--text2); line-height: 1.6; }
+  .alert ul { padding-left: 18px; margin-top: 6px; }
+  .alert li { margin-bottom: 3px; }
+  .alert code { background: var(--bg3); border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; font-family: monospace; font-size: 13px; color: var(--accent); }
+
+  /* Two column grid */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* Info Cards */
+  .info-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+  .info-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 10px; color: var(--text); }
+  .info-card p, .info-card li { font-size: 14px; color: var(--text2); }
+  .info-card ul { padding-left: 18px; }
+  .info-card li { margin-bottom: 4px; }
+
+  /* Table */
+  .data-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .data-table th { text-align: left; padding: 10px 14px; background: var(--bg3); color: var(--text2); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); }
+  .data-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:hover td { background: rgba(88,166,255,0.03); }
+  .table-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+
+  /* Priority Tags */
+  .tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.4px; }
+  .tag-p1 { background: rgba(248,81,73,0.2); color: var(--red); }
+  .tag-p2 { background: rgba(240,136,62,0.2); color: var(--orange); }
+  .tag-p3 { background: rgba(210,153,34,0.2); color: var(--yellow); }
+  .tag-p4 { background: rgba(88,166,255,0.2); color: var(--accent); }
+
+  /* Checklist */
+  .checklist { list-style: none; }
+  .checklist li { padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 10px; font-size: 14px; }
+  .checklist li:last-child { border-bottom: none; }
+  .check-icon { flex-shrink: 0; font-size: 16px; margin-top: 1px; }
+
+  /* Google Ads specific */
+  .ads-structure { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .ads-campaign { border-bottom: 1px solid var(--border); }
+  .ads-campaign:last-child { border-bottom: none; }
+  .ads-campaign-header { padding: 14px 18px; background: var(--bg3); display: flex; justify-content: space-between; align-items: center; }
+  .ads-campaign-header h4 { font-size: 14px; font-weight: 600; color: var(--accent); }
+  .ads-campaign-body { padding: 12px 18px; }
+  .ads-campaign-body p { font-size: 13px; color: var(--text2); margin-bottom: 6px; }
+  .ads-campaign-body strong { color: var(--text); }
+  .kw-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .kw { background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 3px 8px; font-size: 12px; color: var(--text2); font-family: monospace; }
+
+  /* SERP Preview */
+  .serp-preview { background: #fff; border-radius: 8px; padding: 16px; margin: 12px 0; }
+  .serp-url { font-size: 12px; color: #1a0dab; line-height: 1.4; }
+  .serp-title { font-size: 18px; color: #1a0dab; line-height: 1.3; text-decoration: underline; cursor: pointer; }
+  .serp-desc { font-size: 14px; color: #4d5156; line-height: 1.5; margin-top: 2px; }
+  .serp-label { font-size: 12px; color: var(--text2); margin-bottom: 8px; }
+
+  /* Timeline */
+  .timeline { border-left: 2px solid var(--border); padding-left: 24px; margin-top: 16px; }
+  .timeline-item { margin-bottom: 24px; position: relative; }
+  .timeline-item::before { content: ''; position: absolute; left: -30px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
+  .timeline-item h4 { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .timeline-item .tl-meta { font-size: 12px; color: var(--accent); margin-bottom: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .timeline-item ul { padding-left: 16px; }
+  .timeline-item li { font-size: 13px; color: var(--text2); margin-bottom: 3px; }
+
+  /* Footer */
+  footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 32px 0; margin-top: 60px; text-align: center; color: var(--text2); font-size: 13px; }
+  footer strong { color: var(--text); }
+
+  /* Highlight */
+  .hl { color: var(--accent); font-weight: 600; }
+  .hl-red { color: var(--red); font-weight: 600; }
+  .hl-green { color: var(--green); font-weight: 600; }
+  .hl-orange { color: var(--orange); font-weight: 600; }
+  .hl-yellow { color: var(--yellow); font-weight: 600; }
+
+  /* Quick wins box */
+  .quick-wins { background: linear-gradient(135deg, rgba(63,185,80,0.06), rgba(88,166,255,0.06)); border: 1px solid rgba(63,185,80,0.25); border-radius: 12px; padding: 24px; }
+  .quick-wins h3 { color: var(--green); font-size: 17px; margin-bottom: 16px; }
+  .qw-item { display: flex; gap: 12px; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .qw-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+  .qw-num { background: var(--green); color: var(--bg); border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; flex-shrink: 0; margin-top: 1px; }
+  .qw-text strong { color: var(--text); font-size: 14px; display: block; }
+  .qw-text span { color: var(--text2); font-size: 13px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-inner">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <div class="header-badge">Auditoria SEO + Google Ads</div>
+        </div>
+        <h1>mtp-tours.com — Meet the Portuguese</h1>
+        <p class="subtitle">Análise técnica e estratégica de SEO, performance e Google Ads</p>
+        <div class="meta-row">
+          <div class="meta-item">📅 <strong>22 Maio 2026</strong></div>
+          <div class="meta-item">🌐 <strong>mtp-tours.com</strong></div>
+          <div class="meta-item">🏷️ <strong>Tours Privados em Portugal</strong></div>
+          <div class="meta-item">⚙️ <strong>WordPress 6.9.4 + Elementor + WooCommerce</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- SCORE -->
+  <div class="score-section">
+    <div>
+      <div class="score-circle">
+        <div>
+          <div class="score-number">58</div>
+          <span class="score-label">/100</span>
+        </div>
+      </div>
+    </div>
+    <div class="score-details">
+      <h2>Saúde Geral do Site: <span class="hl-orange">D+ — Moderado</span></h2>
+      <p>O site tem uma base sólida com bom conteúdo e estrutura multilingue (PT/EN/DE), mas apresenta problemas técnicos críticos, ausência de dados estruturados, e landing pages não otimizadas para Google Ads. Com as correções certas, o score pode atingir 80+ em 60 dias.</p>
+      <div class="grade-bars">
+        <div class="grade-bar">
+          <div class="grade-bar-label">SEO Técnico</div>
+          <div class="grade-bar-track"><div class="grade-bar-fill" style="width:45%;background:var(--orange)"></div></div>
+          <div class="grade-bar-score" style="color:var(--orange)">45/100</div>
+        </div>
+        <div class="grade-bar">
+          <div class="grade-bar-label">SEO On-Page</div>
+          <div class="grade-bar-track"><div class="grade-bar-fill" style="width:65%;background:var(--yellow)"></div></div>
+          <div class="grade-bar-score" style="color:var(--yellow)">65/100</div>
+        </div>
+        <div class="grade-bar">
+          <div class="grade-bar-label">Conteúdo</div>
+          <div class="grade-bar-track"><div class="grade-bar-fill" style="width:60%;background:var(--yellow)"></div></div>
+          <div class="grade-bar-score" style="color:var(--yellow)">60/100</div>
+        </div>
+        <div class="grade-bar">
+          <div class="grade-bar-label">Google Ads Ready</div>
+          <div class="grade-bar-track"><div class="grade-bar-fill" style="width:35%;background:var(--red)"></div></div>
+          <div class="grade-bar-score" style="color:var(--red)">35/100</div>
+        </div>
+        <div class="grade-bar">
+          <div class="grade-bar-label">Performance</div>
+          <div class="grade-bar-track"><div class="grade-bar-fill" style="width:50%;background:var(--orange)"></div></div>
+          <div class="grade-bar-score" style="color:var(--orange)">50/100</div>
+        </div>
+        <div class="grade-bar">
+          <div class="grade-bar-label">Segurança</div>
+          <div class="grade-bar-track"><div class="grade-bar-fill" style="width:40%;background:var(--orange)"></div></div>
+          <div class="grade-bar-score" style="color:var(--orange)">40/100</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SITE OVERVIEW -->
+  <section>
+    <div class="section-title"><span class="icon">🗺️</span> Visão Geral do Site</div>
+    <div class="two-col">
+      <div class="info-card">
+        <h3>Estrutura Analisada</h3>
+        <ul>
+          <li>Homepage — <code>mtp-tours.com/</code></li>
+          <li>Listagem de Tours — <code>/tours/</code></li>
+          <li>12 Tours Individuais — <code>/tour/[slug]/</code></li>
+          <li>Blog — <code>/blog/</code> (6+ artigos)</li>
+          <li>Sobre Nós — <code>/sobre-nos/</code></li>
+          <li>Contacto — <code>/contacto/</code></li>
+          <li>Welcome Tour — <code>/tour/welcome-tour/</code></li>
+          <li>Tour à la Carte — <code>/tour/a-la-carte/</code></li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>Stack Tecnológico</h3>
+        <ul>
+          <li>🔵 WordPress 6.9.4 (atual)</li>
+          <li>🛒 WooCommerce 10.7.0</li>
+          <li>⚡ Elementor 4.0.8</li>
+          <li>🎠 Slider Revolution 6.7.35</li>
+          <li>🌍 TranslatePress Multilingual</li>
+          <li>📊 Yoast SEO</li>
+          <li>📈 Google Site Kit (GTM)</li>
+          <li>🗺️ Google Maps API</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>Mercados e Idiomas</h3>
+        <ul>
+          <li>🇵🇹 Português — <code>/</code> (padrão)</li>
+          <li>🇬🇧 Inglês — <code>/en/</code></li>
+          <li>🇩🇪 Alemão — <code>/de/</code></li>
+          <li>📍 Destinos: Lisboa, Sintra, Cascais, Arrábida, Alentejo, Fátima</li>
+          <li>💰 Preços: 80€ — 130€+ por pessoa</li>
+          <li>⭐ Reviews: poucas (1-2 por tour)</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>Pontos Fortes Identificados</h3>
+        <ul>
+          <li>✅ HTTPS ativo e funcional</li>
+          <li>✅ Sitemap XML presente e estruturado</li>
+          <li>✅ Meta titles e descriptions preenchidos</li>
+          <li>✅ Open Graph e Twitter Cards configurados</li>
+          <li>✅ Registo oficial RNAAT Nº720/2025</li>
+          <li>✅ Presença em redes sociais (FB, IG, YT, LI, TikTok)</li>
+          <li>✅ Site responsivo e mobile-friendly</li>
+          <li>✅ Multilingue (PT/EN/DE)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CRITICAL ISSUES -->
+  <section>
+    <div class="section-title"><span class="icon">🚨</span> Problemas Críticos — Corrigir Imediatamente</div>
+
+    <div class="alert alert-critical">
+      <div class="alert-header">
+        <span class="alert-badge badge-critical">Crítico</span>
+        <div>
+          <h3>🔑 Chave de API do Google Maps exposta publicamente</h3>
+          <p>A chave <code>AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y</code> está visível no código HTML das páginas de tour. Qualquer pessoa pode copiar esta chave e utilizá-la para fazer pedidos à API à custa da conta da empresa, o que pode gerar custos avultados.</p>
+          <ul>
+            <li><strong>Ação:</strong> Restringir a chave no Google Cloud Console para aceitar apenas pedidos do domínio <code>mtp-tours.com/*</code></li>
+            <li><strong>Verificar:</strong> Se já houve uso abusivo no Google Cloud Console → Faturação</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-critical">
+      <div class="alert-header">
+        <span class="alert-badge badge-critical">Crítico</span>
+        <div>
+          <h3>🔗 Links Quebrados no Rodapé</h3>
+          <p>Os badges de confiança no rodapé — TripAdvisor, Turismo de Cascais e Turismo de Lisboa — apontam todos para <code>#</code> (link vazio/inativo). São sinais de credibilidade importantes para conversão e para o E-E-A-T do Google.</p>
+          <ul>
+            <li><strong>Ação:</strong> Adicionar os URLs corretos para o perfil do TripAdvisor, página de Cascais e página de Lisboa</li>
+            <li><strong>Impacto:</strong> Confiança do visitante e sinal de autoridade para SEO</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-critical">
+      <div class="alert-header">
+        <span class="alert-badge badge-critical">Crítico</span>
+        <div>
+          <h3>📊 Ausência Total de Dados Estruturados (Schema.org)</h3>
+          <p>Nenhuma página do site tem Schema.org markup implementado. Para um negócio de tours, isto significa perda de rich snippets no Google: sem estrelas de avaliação nos resultados, sem preço visível, sem informação de disponibilidade. Os concorrentes com Schema aparecem de forma mais apelativa no Google.</p>
+          <ul>
+            <li><strong>Schemas em falta:</strong> <code>TouristAttraction</code>, <code>Product</code> (com preço), <code>Review</code>/<code>AggregateRating</code>, <code>LocalBusiness</code>, <code>BreadcrumbList</code>, <code>FAQPage</code></li>
+            <li><strong>Impacto direto:</strong> Sem estrelas nos resultados orgânicos → menor CTR vs. concorrência</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-critical">
+      <div class="alert-header">
+        <span class="alert-badge badge-critical">Crítico</span>
+        <div>
+          <h3>💰 Inconsistência de Preços (Confunde utilizadores e Google)</h3>
+          <p>A homepage exibe <strong>"A partir de 110€"</strong> para o tour Sintra, mas ao aceder à página do tour o widget de reserva mostra <strong>150€/pessoa</strong> (adulto). Esta discrepância danifica a confiança e o Quality Score do Google Ads.</p>
+          <ul>
+            <li><strong>Ação:</strong> Alinhar o preço apresentado na homepage com o preço real da página de tour</li>
+            <li><strong>Nota:</strong> "A partir de" deve corresponder ao mínimo real (ex: mín. 2 adultos × 110€)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-high">
+      <div class="alert-header">
+        <span class="alert-badge badge-high">Alto</span>
+        <div>
+          <h3>🤖 Conflito no robots.txt</h3>
+          <p>O ficheiro <code>robots.txt</code> tem dois blocos <code>User-agent: *</code> com configurações conflituantes — um com <code>Disallow:</code> específicos e outro com <code>Disallow:</code> vazio (permite tudo). O segundo bloco sobrescreve o primeiro na maioria dos crawlers.</p>
+          <ul>
+            <li><strong>Resultado atual:</strong> O Google provavelmente consegue rastrear <code>/wp-admin/</code> e outros diretórios sensíveis</li>
+            <li><strong>Ação:</strong> Consolidar num único bloco com todas as regras</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEO TECNICO -->
+  <section>
+    <div class="section-title"><span class="icon">⚙️</span> SEO Técnico — Problemas Encontrados</div>
+
+    <div class="alert alert-high">
+      <div class="alert-header">
+        <span class="alert-badge badge-high">Alto</span>
+        <div>
+          <h3>🏷️ URLs de Filtro Não Indexáveis (Conteúdo Duplicado)</h3>
+          <p>As páginas de filtro por localização usam query parameters: <code>/tours/?field[ap_localizacao]=evora</code>. O Google trata estas como variantes da página <code>/tours/</code>, criando risco de conteúdo duplicado e diluição de autoridade. Além disso, não são URLs memoráveis nem adequadas para anúncios.</p>
+          <ul>
+            <li><strong>Ideal:</strong> <code>/tours/alentejo/</code>, <code>/tours/sintra/</code>, <code>/tours/lisboa/</code></li>
+            <li><strong>Impacto SEO:</strong> Páginas de destino individuais com URL limpa rankeiam melhor para termos como "tour sintra privado"</li>
+            <li><strong>Impacto Ads:</strong> URLs com parâmetros reduzem o Quality Score e o Ad Relevance</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-high">
+      <div class="alert-header">
+        <span class="alert-badge badge-high">Alto</span>
+        <div>
+          <h3>🌍 URLs de Blog em PT na Versão EN</h3>
+          <p>As categorias do blog em inglês usam slugs portuguesas: <code>/en/category/opiniao/</code> em vez de <code>/en/category/opinion/</code>. Isto confunde o Google sobre o idioma da página e prejudica o rankeamento para pesquisas em inglês.</p>
+          <ul>
+            <li>Afeta: <code>/en/category/opiniao/</code>, <code>/en/category/enoturismo/</code></li>
+            <li><strong>Ação:</strong> Criar slugs em inglês para todas as categorias e tags na versão EN</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-medium">
+      <div class="alert-header">
+        <span class="alert-badge badge-medium">Médio</span>
+        <div>
+          <h3>🔗 Hreflang — Verificação Necessária</h3>
+          <p>O site usa TranslatePress para PT/EN/DE. Os hreflang tags existem mas devem ser auditados — há elementos no site que ainda aparecem em português na versão EN (ex: URL do carrinho <code>/carrinho/</code> nas páginas em inglês).</p>
+          <ul>
+            <li><strong>Ação:</strong> Verificar hreflang com Google Search Console e ferramenta como hreflang.org</li>
+            <li>Traduzir o URL do carrinho para a versão EN (<code>/en/cart/</code>)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-medium">
+      <div class="alert-header">
+        <span class="alert-badge badge-medium">Médio</span>
+        <div>
+          <h3>📦 Slider Revolution — Risco de Segurança e Performance</h3>
+          <p>O Slider Revolution 6.7.35 é usado ativamente. Versões antigas deste plugin foram alvo de exploits graves. Além disso, carrega assets pesados (JS/CSS) em todas as páginas mesmo quando não há slider, impactando o Core Web Vitals (LCP, CLS).</p>
+          <ul>
+            <li><strong>Ação:</strong> Manter sempre atualizado; considerar substituir por sliders mais leves</li>
+            <li><strong>Performance:</strong> Usar lazy loading para slides; carregar assets apenas onde necessário</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-medium">
+      <div class="alert-header">
+        <span class="alert-badge badge-medium">Médio</span>
+        <div>
+          <h3>🖼️ Imagens Não Otimizadas</h3>
+          <p>Imagens de 2560px de largura são servidas no site (ex: <code>We-scaled.jpg</code>, <code>Electrico-Lisboa-scaled.jpg</code>). Mesmo com redimensionamento CSS, o browser descarrega a imagem full-size, aumentando o tempo de carregamento e prejudicando o LCP.</p>
+          <ul>
+            <li><strong>Ação:</strong> Converter para WebP; usar <code>srcset</code> para servir tamanhos adequados a cada viewport</li>
+            <li>Ativar compressão de imagens no WordPress (Imagify, ShortPixel, ou similar)</li>
+            <li>Ativar lazy loading nativo para imagens abaixo do fold</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-medium">
+      <div class="alert-header">
+        <span class="alert-badge badge-medium">Médio</span>
+        <div>
+          <h3>⚡ Stack Pesado — Core Web Vitals em Risco</h3>
+          <p>A combinação WordPress + Elementor + WooCommerce + Slider Revolution carrega dezenas de ficheiros JS e CSS, muitos render-blocking. Para um site de tours onde o tempo de decisão de compra é curto, cada segundo perdido reduz as conversões.</p>
+          <ul>
+            <li><strong>Ação:</strong> Instalar WP Rocket ou Perfmatters para defer de JS, critical CSS, minificação</li>
+            <li>Ativar CDN (Cloudflare gratuito ou BunnyCDN)</li>
+            <li>Meta: LCP &lt; 2.5s, CLS &lt; 0.1, INP &lt; 200ms</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEO ON-PAGE -->
+  <section>
+    <div class="section-title"><span class="icon">📝</span> SEO On-Page — Análise de Conteúdo</div>
+
+    <div class="table-wrap" style="margin-bottom:20px;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Página</th>
+            <th>Title Tag</th>
+            <th>Meta Description</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Homepage (PT)</td>
+            <td><code style="font-size:12px;">Tours Autênticos em Portugal | Meet the Portuguese</code></td>
+            <td>Descubra o Portugal autêntico com guias locais... (130 chars)</td>
+            <td><span class="hl-green">✅ Bom</span></td>
+          </tr>
+          <tr>
+            <td>Homepage (EN)</td>
+            <td><code style="font-size:12px;">Authentic Tours in Portugal | Meet the Portuguese</code></td>
+            <td>Discover authentic Portugal with local guides... (130 chars)</td>
+            <td><span class="hl-green">✅ Bom</span></td>
+          </tr>
+          <tr>
+            <td>/tours/ (PT)</td>
+            <td><code style="font-size:12px;">Tours Privados em Portugal — Lisboa, Sintra, Alentejo | MTP</code></td>
+            <td>Explore os nossos tours privados por Portugal... (148 chars)</td>
+            <td><span class="hl-green">✅ Bom</span></td>
+          </tr>
+          <tr>
+            <td>Tour — Sintra Signature</td>
+            <td><code style="font-size:12px;">Tour Sintra — Uma Viagem no Tempo | Meet the Portuguese</code></td>
+            <td>Tour privado alternativo por Sintra... Desde 150€/pessoa. (55 chars)</td>
+            <td><span class="hl-yellow">⚠️ Curta</span></td>
+          </tr>
+          <tr>
+            <td>/blog/ (PT)</td>
+            <td><code style="font-size:12px;">Blog — Dicas e Guias de Viagem por Portugal | MTP</code></td>
+            <td>Artigos sobre turismo em Portugal... (121 chars)</td>
+            <td><span class="hl-green">✅ Bom</span></td>
+          </tr>
+          <tr>
+            <td>/sobre-nos/ (PT)</td>
+            <td><code style="font-size:12px;">Sobre Nós — Quem Somos | Meet the Portuguese</code></td>
+            <td>Conheça a Meet the Portuguese: tours autênticos... (100 chars)</td>
+            <td><span class="hl-green">✅ Bom</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="alert alert-medium">
+      <div class="alert-header">
+        <span class="alert-badge badge-medium">Médio</span>
+        <div>
+          <h3>📖 Blog Subdimensionado e Datas Suspeitas</h3>
+          <p>O blog tem apenas 6 artigos, todos publicados em Janeiro de 2026. A publicação em bloco (batch publishing) é detetada pelo Google como comportamento não orgânico e pode prejudicar a autoridade do domínio. Para SEO de conteúdo no nicho de turismo, é necessário um ritmo consistente de publicação.</p>
+          <ul>
+            <li><strong>Ação:</strong> Criar calendário editorial de 2-4 posts/mês</li>
+            <li>Tópicos de alto potencial: "tours privados sintra 2025", "o que visitar alentejo", "guia Lisboa turistas", "melhor época visitar Portugal"</li>
+            <li>Cada artigo deve ter CTA para o tour relevante</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-medium">
+      <div class="alert-header">
+        <span class="alert-badge badge-medium">Médio</span>
+        <div>
+          <h3>🌐 "Send Enquiry" em Inglês na Versão Portuguesa</h3>
+          <p>O botão "Send Enquiry" aparece em inglês na versão PT do site (ex: tour Sintra). Inconsistências de idioma numa página prejudicam a experiência e podem confundir o Google sobre o idioma principal da página.</p>
+          <ul>
+            <li><strong>Ação:</strong> Traduzir para "Enviar Pedido de Informação" na versão PT</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-medium">
+      <div class="alert-header">
+        <span class="alert-badge badge-medium">Médio</span>
+        <div>
+          <h3>⭐ Poucas Reviews e Testemunhos Genéricos</h3>
+          <p>A maioria dos tours tem 0-1 reviews. Os testemunhos da homepage e da página "Sobre Nós" usam a mesma foto de stock para diferentes nomes (James Whitfield, Brandon Mitchell, Stefan Hoffmann, Katrin Bauer), o que não transmite autenticidade.</p>
+          <ul>
+            <li><strong>Ação:</strong> Implementar recolha ativa de reviews (email automático pós-tour)</li>
+            <li>Integrar reviews do TripAdvisor/Google via plugin</li>
+            <li>Usar fotos reais dos clientes (com permissão)</li>
+            <li>Adicionar AggregateRating schema para mostrar estrelas no Google</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-medium">
+      <div class="alert-header">
+        <span class="alert-badge badge-medium">Médio</span>
+        <div>
+          <h3>❓ Ausência de FAQs nas Páginas de Tour</h3>
+          <p>As páginas de tour não têm secção de FAQ, perdendo uma oportunidade dupla: responder a objeções de compra E rankear para FAQPage schema (que pode mostrar perguntas diretamente nos resultados do Google, sem clicar).</p>
+          <ul>
+            <li><strong>Perguntas típicas:</strong> "Posso cancelar? Como funciona o pick-up? Está incluído o almoço? Quantas pessoas por tour?"</li>
+            <li><strong>Ação:</strong> Adicionar FAQ em cada página + implementar FAQPage schema</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GOOGLE ADS -->
+  <section>
+    <div class="section-title"><span class="icon">🎯</span> Google Ads — Diagnóstico e Estratégia</div>
+
+    <div class="alert alert-critical">
+      <div class="alert-header">
+        <span class="alert-badge badge-critical">Crítico</span>
+        <div>
+          <h3>🏗️ Sem Landing Pages Dedicadas para Anúncios</h3>
+          <p>Atualmente as páginas de destino para anúncios seriam ou a homepage, ou páginas de tour individuais, ou páginas de filtro com query parameters. Nenhuma destas é ideal para Google Ads porque faltam elementos essenciais de conversão.</p>
+          <ul>
+            <li>Sem urgência/escassez visível (vagas limitadas, próximas datas)</li>
+            <li>Sem trust badge proeminente ("100% seguro", "cancelamento gratuito")</li>
+            <li>Sem social proof acima do fold (reviews com estrelas)</li>
+            <li>O CTA "Reservar Este Tour" está abaixo do fold em mobile</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-critical">
+      <div class="alert-header">
+        <span class="alert-badge badge-critical">Crítico</span>
+        <div>
+          <h3>📊 Sem Tracking de Conversões Configurado Corretamente</h3>
+          <p>O Google Tag Manager está instalado (via Site Kit), mas não há evidência de goals de conversão configurados: reservas completadas, pedidos de informação enviados, cliques em telefone.</p>
+          <ul>
+            <li><strong>Ação imediata:</strong> Configurar no GTM: (1) Clique em "Reservar Este Tour" → goal, (2) Submissão do formulário de contacto → goal, (3) Clique em número de telefone → goal</li>
+            <li>Configurar Google Ads Conversion Tracking (não depender apenas de GA4)</li>
+            <li>Sem conversões rastreadas, o Smart Bidding não funciona</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-high">
+      <div class="alert-header">
+        <span class="alert-badge badge-high">Alto</span>
+        <div>
+          <h3>🔄 Sem Remarketing / Audiences Configurados</h3>
+          <p>Não há pixel de remarketing do Google Ads visível. Um utilizador que visita a página de um tour e não reserva é perdido sem capacidade de seguimento.</p>
+          <ul>
+            <li><strong>Ação:</strong> Configurar audiences no Google Ads: visitantes de páginas de tour, visitantes que iniciaram checkout, visitantes que viram mais de 3 páginas</li>
+            <li>Criar campanha de RLSA (Remarketing Lists for Search Ads)</li>
+            <li>Criar campanha de Display Remarketing com imagens dos destinos</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:24px;">
+      <h3 style="font-size:17px;font-weight:600;color:var(--text);margin-bottom:16px;">Estrutura Recomendada de Campanhas Google Ads</h3>
+      <div class="ads-structure">
+
+        <div class="ads-campaign">
+          <div class="ads-campaign-header">
+            <h4>📍 Campanha 1 — Branded (Marca)</h4>
+            <span class="tag tag-p1">Prioritária</span>
+          </div>
+          <div class="ads-campaign-body">
+            <p><strong>Objetivo:</strong> Defender a marca e capturar intenção de compra direta</p>
+            <p><strong>Bid Strategy:</strong> Target CPA (após 30+ conversões)</p>
+            <div class="kw-list">
+              <span class="kw">meet the portuguese</span>
+              <span class="kw">mtp tours</span>
+              <span class="kw">mtp-tours.com</span>
+              <span class="kw">meet the portuguese tours</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ads-campaign">
+          <div class="ads-campaign-header">
+            <h4>🗼 Campanha 2 — Tours Lisboa (EN)</h4>
+            <span class="tag tag-p1">Alta Prioridade</span>
+          </div>
+          <div class="ads-campaign-body">
+            <p><strong>Objetivo:</strong> Capturar turistas internacionais a procurar tours em Lisboa</p>
+            <p><strong>Landing Page:</strong> <code>/en/tours/?field[ap_localizacao]=lisboa</code> → idealmente <code>/en/tours/lisbon/</code></p>
+            <p><strong>Geo Target:</strong> UK, USA, Canada, Austrália (+ Portugal)</p>
+            <div class="kw-list">
+              <span class="kw">private tours lisbon</span>
+              <span class="kw">lisbon guided tour</span>
+              <span class="kw">lisbon private day tour</span>
+              <span class="kw">best tours in lisbon</span>
+              <span class="kw">lisbon tour guide</span>
+              <span class="kw">lisbon city tour private</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ads-campaign">
+          <div class="ads-campaign-header">
+            <h4>🏰 Campanha 3 — Tours Sintra (EN)</h4>
+            <span class="tag tag-p1">Alta Prioridade</span>
+          </div>
+          <div class="ads-campaign-body">
+            <p><strong>Objetivo:</strong> Capturar turistas a planear visita a Sintra</p>
+            <p><strong>Landing Page:</strong> <code>/en/tours/sintra/</code> (criar URL dedicada)</p>
+            <p><strong>Geo Target:</strong> UK, USA, Canada (+ Portugal)</p>
+            <div class="kw-list">
+              <span class="kw">sintra tour from lisbon</span>
+              <span class="kw">private tour sintra</span>
+              <span class="kw">sintra day trip</span>
+              <span class="kw">sintra guided tour</span>
+              <span class="kw">sintra cascais tour</span>
+              <span class="kw">best sintra tours</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ads-campaign">
+          <div class="ads-campaign-header">
+            <h4>🌿 Campanha 4 — Tours Alentejo / Arrábida (EN)</h4>
+            <span class="tag tag-p2">Média Prioridade</span>
+          </div>
+          <div class="ads-campaign-body">
+            <p><strong>Objetivo:</strong> Capturar nichos com menor concorrência e CPC mais baixo</p>
+            <div class="kw-list">
+              <span class="kw">alentejo tour from lisbon</span>
+              <span class="kw">evora day trip lisbon</span>
+              <span class="kw">arrabida tour lisbon</span>
+              <span class="kw">fatima tour from lisbon</span>
+              <span class="kw">portugal private tours</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ads-campaign">
+          <div class="ads-campaign-header">
+            <h4>🇩🇪 Campanha 5 — Mercado Alemão (DE)</h4>
+            <span class="tag tag-p2">Média Prioridade</span>
+          </div>
+          <div class="ads-campaign-body">
+            <p><strong>Objetivo:</strong> Explorar o mercado alemão (site já tem versão DE)</p>
+            <p><strong>Landing Page:</strong> <code>/de/tours/</code></p>
+            <p><strong>Geo Target:</strong> Alemanha, Áustria, Suíça</p>
+            <div class="kw-list">
+              <span class="kw">private tour lissabon</span>
+              <span class="kw">sintra tour deutsch</span>
+              <span class="kw">portugal tour deutsch</span>
+              <span class="kw">lissabon privat tour</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ads-campaign">
+          <div class="ads-campaign-header">
+            <h4>🔄 Campanha 6 — Remarketing</h4>
+            <span class="tag tag-p2">Média Prioridade</span>
+          </div>
+          <div class="ads-campaign-body">
+            <p><strong>Objetivo:</strong> Recuperar visitantes que não converteram</p>
+            <p><strong>Audiences:</strong> Visitantes páginas de tour (últimos 30 dias) + Abandonos de checkout</p>
+            <div class="kw-list">
+              <span class="kw">RLSA — busca com intenção de compra</span>
+              <span class="kw">Display — imagens destinos</span>
+              <span class="kw">YouTube — vídeo Portugal</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div style="margin-top:20px;">
+      <div class="alert alert-high">
+        <div class="alert-header">
+          <span class="alert-badge badge-high">Alto</span>
+          <div>
+            <h3>📱 WhatsApp — Canal de Conversão em Falta</h3>
+            <p>O site tem o número <strong>+351 928 405 920</strong> no rodapé, mas não tem botão de WhatsApp. Para o nicho de turismo privado, o WhatsApp é o canal com maior taxa de conversão — os clientes preferem confirmar detalhes em tempo real antes de reservar online.</p>
+            <ul>
+              <li><strong>Ação:</strong> Adicionar botão WhatsApp flutuante em todas as páginas de tour</li>
+              <li>Criar mensagem pré-definida: "Olá! Estou interessado no tour [X]. Podem dar-me mais informações?"</li>
+              <li>Custo: €0 — implementação em 30 minutos</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;">
+      <h3 style="font-size:16px;font-weight:600;color:var(--text);margin-bottom:12px;">Preview dos Anúncios Sugeridos (Google Ads RSA)</h3>
+      <p style="font-size:13px;color:var(--text2);margin-bottom:12px;">Exemplo para campanha "Tours Sintra":</p>
+      <div class="serp-preview">
+        <div class="serp-url">mtp-tours.com › en › tours › sintra</div>
+        <div class="serp-title">Private Sintra Tour — Local Guide | From €102</div>
+        <div class="serp-desc">Explore Sintra's palaces and hidden gems with a passionate local guide. Private tour, hotel pickup included. Book your authentic Portugal experience today.</div>
+      </div>
+      <p style="font-size:12px;color:var(--text2);margin-top:8px;"><em>Headlines sugeridos:</em> "Private Tour Sintra From €102" / "Authentic Sintra With Local Guide" / "Hotel Pickup Included" / "Book Your Sintra Day Trip" / "Electric Van — Comfortable & Green"</p>
+    </div>
+  </section>
+
+  <!-- LOCAL SEO -->
+  <section>
+    <div class="section-title"><span class="icon">📍</span> SEO Local e E-E-A-T</div>
+    <div class="two-col">
+      <div class="alert alert-high" style="margin-bottom:0;">
+        <div class="alert-header">
+          <span class="alert-badge badge-high">Alto</span>
+          <div>
+            <h3>Google Business Profile</h3>
+            <p>Não há integração visível com um perfil Google Business verificado. Para pesquisas locais ("tours lisboa" no Google Maps) é essencial ter um perfil otimizado com fotos, horários, categorias e reviews.</p>
+            <ul>
+              <li>Criar/verificar perfil em Google Business</li>
+              <li>Categoria: "Tour Operator"</li>
+              <li>Adicionar fotos dos tours e da equipa</li>
+              <li>Responder a todas as reviews</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-medium" style="margin-bottom:0;">
+        <div class="alert-header">
+          <span class="alert-badge badge-medium">Médio</span>
+          <div>
+            <h3>LocalBusiness Schema</h3>
+            <p>O número de telefone e registo RNAAT estão apenas em texto no rodapé. Implementar LocalBusiness schema permite ao Google mostrar informações da empresa no Knowledge Panel.</p>
+            <ul>
+              <li>Adicionar: <code>LocalBusiness</code> schema com name, address, telephone, openingHours, priceRange, sameAs (social profiles)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:16px;">
+      <div class="alert alert-medium">
+        <div class="alert-header">
+          <span class="alert-badge badge-medium">Bom — Manter</span>
+          <div>
+            <h3>✅ Sinais de Autoridade Existentes (E-E-A-T)</h3>
+            <p>O site já tem bons sinais de confiança que devem ser <strong>destacados mais proeminentemente</strong> nas páginas de aterragem e nos metadados:</p>
+            <ul>
+              <li>✅ Registo oficial RNAAT Nº720/2025 (Turismo de Portugal)</li>
+              <li>✅ Presença em 5 redes sociais (Facebook, Instagram, YouTube, LinkedIn, TikTok)</li>
+              <li>✅ Equipa real identificada (Nuno Ferreira, Ana Henriques)</li>
+              <li>✅ Parceria com Turismo de Portugal, Turismo de Lisboa, Câmara de Cascais</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCHEMA RECOMMENDATIONS -->
+  <section>
+    <div class="section-title"><span class="icon">🗂️</span> Dados Estruturados — Implementar</div>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Schema</th>
+            <th>Onde Implementar</th>
+            <th>Benefício</th>
+            <th>Prioridade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>TouristAttraction</code> + <code>Product</code></td>
+            <td>Cada página de tour</td>
+            <td>Preço e disponibilidade nos resultados</td>
+            <td><span class="tag tag-p1">P1</span></td>
+          </tr>
+          <tr>
+            <td><code>AggregateRating</code></td>
+            <td>Cada página de tour</td>
+            <td>Estrelas de avaliação no Google</td>
+            <td><span class="tag tag-p1">P1</span></td>
+          </tr>
+          <tr>
+            <td><code>LocalBusiness</code></td>
+            <td>Homepage / rodapé global</td>
+            <td>Knowledge Panel, Google Maps</td>
+            <td><span class="tag tag-p1">P1</span></td>
+          </tr>
+          <tr>
+            <td><code>BreadcrumbList</code></td>
+            <td>Todas as páginas internas</td>
+            <td>Breadcrumbs nos resultados do Google</td>
+            <td><span class="tag tag-p2">P2</span></td>
+          </tr>
+          <tr>
+            <td><code>FAQPage</code></td>
+            <td>Páginas de tour + FAQ page</td>
+            <td>Perguntas expandidas nos resultados</td>
+            <td><span class="tag tag-p2">P2</span></td>
+          </tr>
+          <tr>
+            <td><code>Organization</code></td>
+            <td>Homepage</td>
+            <td>Identidade da marca, redes sociais</td>
+            <td><span class="tag tag-p3">P3</span></td>
+          </tr>
+          <tr>
+            <td><code>BlogPosting</code></td>
+            <td>Cada artigo do blog</td>
+            <td>Data de publicação, autor nos resultados</td>
+            <td><span class="tag tag-p3">P3</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- QUICK WINS -->
+  <section>
+    <div class="quick-wins">
+      <h3>⚡ Quick Wins — Máximo Impacto, Mínimo Esforço</h3>
+      <div class="qw-item">
+        <div class="qw-num">1</div>
+        <div class="qw-text">
+          <strong>Adicionar botão WhatsApp flutuante</strong>
+          <span>30 minutos de implementação. Impacto imediato nas conversões. Plugin gratuito: WP Social Chat.</span>
+        </div>
+      </div>
+      <div class="qw-item">
+        <div class="qw-num">2</div>
+        <div class="qw-text">
+          <strong>Restringir a chave API do Google Maps</strong>
+          <span>5 minutos no Google Cloud Console. Previne custos inesperados e risco de segurança.</span>
+        </div>
+      </div>
+      <div class="qw-item">
+        <div class="qw-num">3</div>
+        <div class="qw-text">
+          <strong>Corrigir links quebrados no rodapé (TripAdvisor, etc.)</strong>
+          <span>15 minutos. Adicionar URLs reais dos perfis e certificações. Melhora trust signals e conversão.</span>
+        </div>
+      </div>
+      <div class="qw-item">
+        <div class="qw-num">4</div>
+        <div class="qw-text">
+          <strong>Instalar plugin de Schema (Yoast já está instalado — ativar Product schema)</strong>
+          <span>1-2 horas. O Yoast Premium ou RankMath Pro permite adicionar Tour/Product schema a partir do dashboard.</span>
+        </div>
+      </div>
+      <div class="qw-item">
+        <div class="qw-num">5</div>
+        <div class="qw-text">
+          <strong>Configurar Goals no Google Analytics 4 + GTM</strong>
+          <span>2-3 horas. Sem tracking de conversões, nenhuma campanha de Google Ads pode ser otimizada.</span>
+        </div>
+      </div>
+      <div class="qw-item">
+        <div class="qw-num">6</div>
+        <div class="qw-text">
+          <strong>Adicionar política de cancelamento visível nas páginas de tour</strong>
+          <span>1 hora. "Cancelamento gratuito até 48h antes" reduz friccção de compra e aumenta conversões.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section>
+    <div class="section-title"><span class="icon">🗓️</span> Roadmap de Implementação</div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="tl-meta">Semana 1 — Crítico</div>
+        <h4>Segurança e Fundações</h4>
+        <ul>
+          <li>Restringir chave API Google Maps no Cloud Console</li>
+          <li>Corrigir links quebrados no rodapé</li>
+          <li>Consolidar robots.txt num único bloco User-agent</li>
+          <li>Verificar e ativar Google Business Profile</li>
+          <li>Adicionar botão WhatsApp flutuante</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-meta">Semana 2-3 — Alta Prioridade</div>
+        <h4>Conversões e Tracking</h4>
+        <ul>
+          <li>Configurar Google Ads Conversion Tracking (reservas, formulários, tel.)</li>
+          <li>Configurar Goals no GA4</li>
+          <li>Criar audiences de remarketing no Google Ads</li>
+          <li>Implementar Schema: Product + AggregateRating + LocalBusiness</li>
+          <li>Corrigir inconsistência de preços (homepage vs. páginas de tour)</li>
+          <li>Adicionar política de cancelamento visível</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-meta">Mês 2 — SEO e Ads</div>
+        <h4>Lançamento de Campanhas e Otimização SEO</h4>
+        <ul>
+          <li>Criar landing pages dedicadas por destino (/tours/lisboa/, /tours/sintra/, etc.)</li>
+          <li>Lançar campanhas Google Ads: Branded + Lisboa + Sintra (EN)</li>
+          <li>Implementar BreadcrumbList + FAQPage schema</li>
+          <li>Criar 2 artigos de blog por mês com CTA para tours</li>
+          <li>Otimizar imagens para WebP + lazy loading</li>
+          <li>Traduzir slugs de categorias EN (opiniao → opinion)</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-meta">Mês 3 — Crescimento</div>
+        <h4>Expansão e Refinamento</h4>
+        <ul>
+          <li>Lançar campanhas Alentejo/Arrábida (EN) + mercado Alemão (DE)</li>
+          <li>Ativar campanhas de Remarketing (Display + RLSA)</li>
+          <li>Instalar plugin de otimização de performance (WP Rocket)</li>
+          <li>Integrar reviews do TripAdvisor/Google na página</li>
+          <li>Criar processo de recolha automática de reviews pós-tour</li>
+          <li>Análise e ajuste de lances com base em dados de conversão</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIORITY SUMMARY -->
+  <section>
+    <div class="section-title"><span class="icon">📋</span> Resumo de Prioridades</div>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Ação</th>
+            <th>Área</th>
+            <th>Esforço</th>
+            <th>Impacto</th>
+            <th>Prioridade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Restringir chave API Google Maps</td>
+            <td>Segurança</td>
+            <td>Baixo</td>
+            <td>Crítico</td>
+            <td><span class="tag tag-p1">P1</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Adicionar WhatsApp button</td>
+            <td>Conversão</td>
+            <td>Baixo</td>
+            <td>Alto</td>
+            <td><span class="tag tag-p1">P1</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Configurar conversion tracking (GTM + Ads)</td>
+            <td>Google Ads</td>
+            <td>Médio</td>
+            <td>Crítico</td>
+            <td><span class="tag tag-p1">P1</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Implementar Schema (Product + Rating)</td>
+            <td>SEO</td>
+            <td>Médio</td>
+            <td>Alto</td>
+            <td><span class="tag tag-p1">P1</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Corrigir links quebrados no rodapé</td>
+            <td>UX / Trust</td>
+            <td>Baixo</td>
+            <td>Médio</td>
+            <td><span class="tag tag-p1">P1</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Criar landing pages /tours/[destino]/</td>
+            <td>SEO + Ads</td>
+            <td>Alto</td>
+            <td>Alto</td>
+            <td><span class="tag tag-p2">P2</span></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Lançar campanhas Google Ads EN</td>
+            <td>Google Ads</td>
+            <td>Médio</td>
+            <td>Alto</td>
+            <td><span class="tag tag-p2">P2</span></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>Otimizar imagens (WebP + lazy load)</td>
+            <td>Performance</td>
+            <td>Médio</td>
+            <td>Médio</td>
+            <td><span class="tag tag-p2">P2</span></td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>Blog: 2 posts/mês com SEO</td>
+            <td>SEO Conteúdo</td>
+            <td>Alto</td>
+            <td>Médio</td>
+            <td><span class="tag tag-p2">P2</span></td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>Corrigir robots.txt + URL slugs EN</td>
+            <td>SEO Técnico</td>
+            <td>Baixo</td>
+            <td>Médio</td>
+            <td><span class="tag tag-p2">P2</span></td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td>Campanha Remarketing Display + RLSA</td>
+            <td>Google Ads</td>
+            <td>Médio</td>
+            <td>Médio</td>
+            <td><span class="tag tag-p3">P3</span></td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td>Instalar WP Rocket / cache + CDN</td>
+            <td>Performance</td>
+            <td>Baixo</td>
+            <td>Médio</td>
+            <td><span class="tag tag-p3">P3</span></td>
+          </tr>
+          <tr>
+            <td>13</td>
+            <td>Campanha DE (mercado alemão)</td>
+            <td>Google Ads</td>
+            <td>Médio</td>
+            <td>Médio</td>
+            <td><span class="tag tag-p3">P3</span></td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td>Integrar reviews externas (TripAdvisor/Google)</td>
+            <td>Trust / SEO</td>
+            <td>Médio</td>
+            <td>Médio</td>
+            <td><span class="tag tag-p3">P3</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="container">
+    <p><strong>Auditoria SEO & Google Ads — mtp-tours.com</strong></p>
+    <p style="margin-top:6px;">Relatório gerado em 22 de Maio de 2026 · Este documento é confidencial e destinado exclusivamente ao cliente.</p>
+  </div>
+</footer>
+
+</body>
+</html>
